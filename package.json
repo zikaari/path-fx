@@ -1,0 +1,30 @@
+{
+  "name": "path-fx",
+  "version": "0.0.0",
+  "description": "Path utils which don't necessarily depend on Node.js",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chipto/path-fx.git"
+  },
+  "keywords": [
+    "path",
+    "utils",
+    "browser"
+  ],
+  "author": "Neek Sandhu <neek.sandhu@chipto.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chipto/path-fx/issues"
+  },
+  "homepage": "https://github.com/chipto/path-fx#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^2.6.1"
+  }
+}
