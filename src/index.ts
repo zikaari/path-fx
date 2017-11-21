@@ -6,7 +6,7 @@ export function setPathSeparator(separator: string) {
 
 export function join(...paths: string[]) {
     const composed = [];
-    if (!(paths.slice(1).every((path) => path.search(/[\/\\]/) !== 0))) {
+    if (!(paths.slice(1).every((path) => { checkPath(path); return path.search(/[\/\\]/) !== 0; }))) {
         throw new TypeError('Only first path fragment can be absolute. Subsequent paths must not begin with "\\" or "/"');
     }
     const leadingSep = paths[0].search(/[\/\\]/) === 0 ? pathSeparator : '';
