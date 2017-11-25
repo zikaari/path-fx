@@ -23,7 +23,9 @@
     "url": "https://github.com/chipto/path-fx/issues"
   },
   "homepage": "https://github.com/chipto/path-fx#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@types/node": "^8.0.53"
+  },
   "devDependencies": {
     "typescript": "^2.6.1"
   }

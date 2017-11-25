@@ -1,4 +1,9 @@
-let pathSeparator = /win/i.test((navigator.platform)) ? '\\' : '/';
+const platform = typeof navigator === 'object' ?
+    navigator.platform :
+    typeof process === 'object' ?
+        process.platform :
+        '';
+let pathSeparator = /win/i.test(platform || '') ? '\\' : '/';
 
 export function setPathSeparator(separator: string) {
     pathSeparator = separator;
