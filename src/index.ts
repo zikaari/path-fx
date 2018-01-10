@@ -36,6 +36,10 @@ export function basename(path: string): string {
     return (removeTrailingSlashes(path || '').match(/[^\\\/]+$/) || [])[0] || '';
 }
 
+export function normalize(path: string): string {
+    return join(path);
+}
+
 export function extname(path: string): string {
     const name = basename(path);
     const idx = name.lastIndexOf('.');
@@ -61,6 +65,12 @@ export function dirname(path: string) {
     return dir.length === 0 ? '.' : leadingSep + dir;
 }
 
+export function isPathInside(containingPath: string, path: string): boolean {
+    const pathFrags = splitPath(path);
+    const contPathFrags = splitPath(containingPath);
+    return pathFrags.every((fragment, idx) => fragment === contPathFrags[idx]);
+}
+
 function checkPath(path: string) {
     if (typeof path !== 'string') {
         throw new TypeError(`Path must be a string. Received ${typeof path}`);
@@ -71,4 +81,9 @@ function removeTrailingSlashes(path: string) {
     if (typeof path === 'string' && path.length > 0) {
         return path.replace(/[\/\\]+$/, '');
     }
+}
+
+function splitPath(path: string): string[] {
+    checkPath(path);
+    return path.match(/([^\\\/]+)/g);
 }
