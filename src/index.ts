@@ -85,5 +85,5 @@ function removeTrailingSlashes(path: string) {
 
 function splitPath(path: string): string[] {
     checkPath(path);
-    return path.match(/([^\\\/]+)/g);
+    return removeTrailingSlashes(path).split(/[\/\\]+/g);
 }
