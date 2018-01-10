@@ -7,3 +7,4 @@ export declare function toWinPath(path: string): string;
 export declare function toUnixPath(path: string): string;
 export declare function dirname(path: string): string;
 export declare function isPathInside(containingPath: string, path: string): boolean;
+export declare function pathDepth(path: string): number;

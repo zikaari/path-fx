@@ -71,6 +71,10 @@ export function isPathInside(containingPath: string, path: string): boolean {
     return pathFrags.every((fragment, idx) => fragment === contPathFrags[idx]);
 }
 
+export function pathDepth(path: string) {
+    return splitPath(path).length;
+}
+
 function checkPath(path: string) {
     if (typeof path !== 'string') {
         throw new TypeError(`Path must be a string. Received ${typeof path}`);
