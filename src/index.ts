@@ -1,3 +1,5 @@
+import * as _isRelative from 'is-relative';
+
 const platform = typeof navigator === 'object' ?
     navigator.platform :
     typeof process === 'object' ?
@@ -69,6 +71,10 @@ export function isPathInside(containingPath: string, path: string): boolean {
     const pathFrags = splitPath(path);
     const contPathFrags = splitPath(containingPath);
     return pathFrags.every((fragment, idx) => fragment === contPathFrags[idx]);
+}
+
+export function isRelative(path: string): boolean {
+    return _isRelative(path);
 }
 
 export function pathDepth(path: string) {
