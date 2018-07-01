@@ -1,6 +1,6 @@
 {
   "name": "path-fx",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Path utils which don't necessarily depend on Node.js",
   "main": "dist/index.js",
   "typings": "dist/typings/index.d.ts",
