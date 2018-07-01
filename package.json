@@ -10,19 +10,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chipto/path-fx.git"
+    "url": "git+https://github.com/NeekSandhu/path-fx.git"
   },
   "keywords": [
     "path",
     "utils",
     "browser"
   ],
-  "author": "Neek Sandhu <neek.sandhu@chipto.io>",
+  "author": "Neek Sandhu <neek.sandhu@outlook.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chipto/path-fx/issues"
+    "url": "https://github.com/NeekSandhu/path-fx/issues"
   },
-  "homepage": "https://github.com/chipto/path-fx#readme",
+  "homepage": "https://github.com/NeekSandhu/path-fx#readme",
   "dependencies": {
     "@types/node": "^8.0.53",
     "is-relative": "^1.0.0"
