@@ -22,7 +22,7 @@ console.log(dirname('/etc/ping/pong')); // > /etc/ping
 console.log(basename('/etc/ping/pong/foo.js')); // > .js
 ```
 
-## API defined in `lib/index.d.ts`
+## API defined in `dist/typings/index.d.ts`
 
 ## Important note
 
