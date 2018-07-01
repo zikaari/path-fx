@@ -2,8 +2,8 @@
   "name": "path-fx",
   "version": "1.4.0",
   "description": "Path utils which don't necessarily depend on Node.js",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "typings": "dist/typings/index.d.ts",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w"

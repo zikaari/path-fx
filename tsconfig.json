@@ -2,13 +2,13 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es6",
-        "outDir": "./lib",
+        "outDir": "./dist",
         "sourceMap": true,
         "declaration": true,
-        "declarationDir": "./lib"
+        "declarationDir": "./dist/typings"
     },
     "exclude": [
         "node_modules",
-        "lib"
+        "dist"
     ]
 }
