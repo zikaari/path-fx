@@ -13,11 +13,9 @@ export function setPathSeparator(separator: string) {
 
 export function join(...paths: string[]) {
     const composed = [];
-    if (!(paths.slice(1).every((path) => { checkPath(path); return path.search(/[\/\\]/) !== 0; }))) {
-        throw new TypeError('Only first path fragment can be absolute. Subsequent paths must not begin with "\\" or "/"');
-    }
     const leadingSep = paths[0].search(/[\/\\]/) === 0 ? pathSeparator : '';
-    paths.forEach((path) => {
+    for (let i = 0; i < paths.length; i++) {
+        const path = paths[i];
         checkPath(path);
         const parts = path.match(/[^\/\\]+/g);
         parts.forEach((part) => {
@@ -29,7 +27,7 @@ export function join(...paths: string[]) {
                 composed.push(part);
             }
         });
-    });
+    }
     return leadingSep + composed.join(pathSeparator);
 }
 
@@ -61,7 +59,7 @@ export function toUnixPath(path: string) {
 export function dirname(path: string) {
     checkPath(path);
     const leadingSep = path.search(/[\/\\]/) === 0 ? pathSeparator : '';
-    const parts = path.match(/[^\/\\]+/g) || [];
+    const parts = path.match(/[^\\\/]+/g) || [];
     parts.pop();
     const dir = parts.join(pathSeparator);
     return dir.length === 0 ? '.' : leadingSep + dir;
@@ -87,13 +85,13 @@ function checkPath(path: string) {
     }
 }
 
-function removeTrailingSlashes(path: string) {
+export function removeTrailingSlashes(path: string) {
     if (typeof path === 'string' && path.length > 0) {
         return path.replace(/[\/\\]+$/, '');
     }
 }
 
-function splitPath(path: string): string[] {
+export function splitPath(path: string): string[] {
     checkPath(path);
     return removeTrailingSlashes(path).split(/[\/\\]+/g);
 }

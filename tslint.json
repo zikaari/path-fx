@@ -5,7 +5,8 @@
         "tslint:recommended"
     ],
     "rules": {
-        "quotemark": false,
-        "max-line-length": false
+        "quotemark": [true, "single"],
+        "max-line-length": false,
+        "prefer-for-of": false
     }
 }
