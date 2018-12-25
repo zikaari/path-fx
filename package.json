@@ -24,10 +24,10 @@
   },
   "homepage": "https://github.com/NeekSandhu/path-fx#readme",
   "dependencies": {
-    "@types/node": "^8.0.53",
     "is-relative": "^1.0.0"
   },
   "devDependencies": {
+    "@types/node": "^8.0.53",
     "typescript": "^2.6.1"
   }
 }
