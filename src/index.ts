@@ -13,22 +13,24 @@ export function setPathSeparator(separator: string) {
 
 export function join(...paths: string[]) {
     const composed = [];
-    const leadingSep = paths[0].search(/[\/\\]/) === 0 ? pathSeparator : '';
+    const hasLeadingSep = /^[\\\/]/.test(paths[0]);
+    const hasTrailingSep = /[\\\/]$/.test(paths[paths.length - 1]);
     for (let i = 0; i < paths.length; i++) {
         const path = paths[i];
         checkPath(path);
         const parts = path.match(/[^\/\\]+/g);
-        parts.forEach((part) => {
+        for (let j = 0; j < parts.length; j++) {
+            const part = parts[j];
             if (part === '.') {
-                return;
+                continue;
             } else if (/^[.]{2,}$/.test(part)) {
                 composed.pop();
             } else {
                 composed.push(part);
             }
-        });
+        }
     }
-    return leadingSep + composed.join(pathSeparator);
+    return (hasLeadingSep ? pathSeparator : '') + composed.join(pathSeparator) + (hasTrailingSep ? pathSeparator : '');
 }
 
 export function basename(path: string): string {
@@ -94,4 +96,28 @@ export function removeTrailingSlashes(path: string) {
 export function splitPath(path: string): string[] {
     checkPath(path);
     return removeTrailingSlashes(path).split(/[\/\\]+/g);
+}
+
+/**
+ * Relative path `to` something `from` something
+ * `from` and `to` MUST BE absolute paths
+ *
+ * @param from Absolute from
+ * @param to Absolute to
+ */
+export function relative(from: string, to: string) {
+    if (isRelative(from) || isRelative(to)) {
+        throw new Error(`'from' and 'to' both must be absolute paths`);
+    }
+    const fromFrags = splitPath(from);
+    const toFrags = splitPath(to);
+    const hasTrailingSep = /[\\\/]$/.test(to);
+    for (let i = 0; i < fromFrags.length; i++) {
+        const fromFrag = fromFrags[i];
+        if (fromFrag !== toFrags[i]) {
+            const remainder = fromFrags.length - i;
+            return Array(remainder).fill('..').concat(toFrags.slice(i)).join(pathSeparator) + (hasTrailingSep ? pathSeparator : '');
+        }
+    }
+    return toFrags.slice(fromFrags.length).join(pathSeparator) + (hasTrailingSep ? pathSeparator : '');
 }
