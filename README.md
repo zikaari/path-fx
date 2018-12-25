@@ -19,7 +19,7 @@ npm i path-fx
 ```javascript
 import { dirname, extname, setPathSeparator } from 'path-fx';
 console.log(dirname('/etc/ping/pong')); // > /etc/ping
-console.log(basename('/etc/ping/pong/foo.js')); // > .js
+console.log(extname('/etc/ping/pong/foo.js')); // > .js
 ```
 
 ## API defined in `dist/typings/index.d.ts`
