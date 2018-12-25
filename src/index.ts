@@ -95,7 +95,11 @@ export function removeTrailingSlashes(path: string) {
 
 export function splitPath(path: string): string[] {
     checkPath(path);
-    return removeTrailingSlashes(path).split(/[\/\\]+/g);
+    const frags = removeTrailingSlashes(path).split(/[\/\\]+/g);
+    if (frags[0] === '') { // empty caused by leading sep
+        frags.shift();
+    }
+    return frags;
 }
 
 /**
