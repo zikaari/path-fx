@@ -5,6 +5,7 @@
         "tslint:recommended"
     ],
     "rules": {
+        "semicolon": [true, "never"],
         "quotemark": [true, "single"],
         "max-line-length": false,
         "prefer-for-of": false
