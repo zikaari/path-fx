@@ -12,7 +12,13 @@ const CONSTANTS = {
 }
 
 export class PathFx {
-    constructor(private platform: 'win32' | 'unix') { }
+    private readonly separator: string
+
+    constructor(private readonly platform: 'win32' | 'unix') {
+        this.separator = platform === 'win32'
+            ? CONSTANTS.WIN_JOIN_CHARACTER
+            : CONSTANTS.UNIX_JOIN_CHARACTER
+    }
 
     public join = (...paths: string[]) => {
         const composed = []
@@ -38,7 +44,7 @@ export class PathFx {
         if (hasTrailingSep) {
             composed.push('')
         }
-        return composed.join(this.platform === 'win32' ? CONSTANTS.WIN_JOIN_CHARACTER : CONSTANTS.UNIX_JOIN_CHARACTER)
+        return composed.join(this.separator)
     }
 
     /**
@@ -55,7 +61,6 @@ export class PathFx {
         const fromFrags = this.splitPath(from)
         const toFrags = this.splitPath(to)
         const hasTrailingSep = CONSTANTS.ANY_TRAILING_SEP_RE.test(to)
-        const joinCharacter = this.platform === 'win32' ? CONSTANTS.WIN_JOIN_CHARACTER : CONSTANTS.UNIX_JOIN_CHARACTER
         for (let i = 0; i < fromFrags.length; i++) {
             const fromFrag = fromFrags[i]
             if (fromFrag !== toFrags[i]) {
@@ -63,10 +68,10 @@ export class PathFx {
                 return Array(remainder)
                     .fill('..')
                     .concat(toFrags.slice(i))
-                    .join(joinCharacter) + (hasTrailingSep ? joinCharacter : '')
+                    .join(this.separator) + (hasTrailingSep ? this.separator : '')
             }
         }
-        return toFrags.slice(fromFrags.length).join(joinCharacter) + (hasTrailingSep ? joinCharacter : '')
+        return toFrags.slice(fromFrags.length).join(this.separator) + (hasTrailingSep ? this.separator : '')
     }
 
     public isPathInside = (containingPath: string, path: string): boolean => {
@@ -114,12 +119,12 @@ export class PathFx {
         const hasLeadingSep = CONSTANTS.ANY_LEADING_SEP_RE.test(path)
         parts.pop()
         if (parts.length === 0) {
-            return '.'
+            return hasLeadingSep ? this.separator : '.'
         }
         if (hasLeadingSep) {
             parts.unshift('')
         }
-        return parts.join(this.platform === 'win32' ? CONSTANTS.WIN_JOIN_CHARACTER : CONSTANTS.UNIX_JOIN_CHARACTER)
+        return parts.join(this.separator)
     }
 
     public splitPath = (path: string): string[] => {
