@@ -12,10 +12,10 @@ const CONSTANTS = {
 }
 
 export class PathFx {
-    private readonly separator: string
+    public readonly sep: string
 
     constructor(private readonly platform: 'win32' | 'unix') {
-        this.separator = platform === 'win32'
+        this.sep = platform === 'win32'
             ? CONSTANTS.WIN_JOIN_CHARACTER
             : CONSTANTS.UNIX_JOIN_CHARACTER
     }
@@ -44,7 +44,7 @@ export class PathFx {
         if (hasTrailingSep) {
             composed.push('')
         }
-        return composed.join(this.separator)
+        return composed.join(this.sep)
     }
 
     /**
@@ -68,10 +68,10 @@ export class PathFx {
                 return Array(remainder)
                     .fill('..')
                     .concat(toFrags.slice(i))
-                    .join(this.separator) + (hasTrailingSep ? this.separator : '')
+                    .join(this.sep) + (hasTrailingSep ? this.sep : '')
             }
         }
-        return toFrags.slice(fromFrags.length).join(this.separator) + (hasTrailingSep ? this.separator : '')
+        return toFrags.slice(fromFrags.length).join(this.sep) + (hasTrailingSep ? this.sep : '')
     }
 
     public isPathInside = (containingPath: string, path: string): boolean => {
@@ -119,12 +119,12 @@ export class PathFx {
         const hasLeadingSep = CONSTANTS.ANY_LEADING_SEP_RE.test(path)
         parts.pop()
         if (parts.length === 0) {
-            return hasLeadingSep ? this.separator : '.'
+            return hasLeadingSep ? this.sep : '.'
         }
         if (hasLeadingSep) {
             parts.unshift('')
         }
-        return parts.join(this.separator)
+        return parts.join(this.sep)
     }
 
     public splitPath = (path: string): string[] => {
